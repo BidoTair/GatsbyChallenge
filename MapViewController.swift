@@ -69,8 +69,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location = locations.last! as CLLocation
         let latitude = location.coordinate.latitude
+        let longitude = location.coordinate.longitude
         
-        print(latitude)
+        self.setupMapRegion(latitude, longitude: longitude)
+        
+        
+        
        
         
         if (latitude >= 40.760401 && latitude <= 40.762990) {
@@ -79,6 +83,17 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         else {
             rotation = false
         }
+    }
+    
+    
+    func setupMapRegion(latitude: Double, longitude: Double) {
+        let center = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        MapView.setCenterCoordinate(center, animated: true)
+        
+//         let span = MKCoordinateSpanMake(0.01, 0.01)
+//         let region = MKCoordinateRegion(center: n, span: span)
+//          MapView.setRegion(region, animated: true)
+        
     }
     
     
